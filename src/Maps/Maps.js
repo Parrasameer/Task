@@ -5,7 +5,7 @@ import { Line } from "react-chartjs-2";
 import { Chart, registerables } from 'chart.js';
 import 'chartjs-adapter-date-fns';
 import "leaflet/dist/leaflet.css";
-// import "./styles.css"; // Import your Tailwind CSS styles
+
 
 const WORLDWIDE_URL = "https://disease.sh/v3/covid-19/all";
 const COUNTRIES_URL = "https://disease.sh/v3/covid-19/countries";
