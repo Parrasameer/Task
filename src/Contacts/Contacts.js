@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from 'react-redux'
-import { todo, update, del } from '../ToDoReducers'
-import { useState } from "react";
+import { del } from '../ToDoReducers'
+
 
 
 
@@ -9,8 +9,7 @@ import { useState } from "react";
 
 function Contacts() {
     const navigate = useNavigate();
-    const [todoTxt, setTodo] = useState()
-    const [todoIndex, setIndex] = useState()
+
     const value = useSelector((state) => state.todo.value)
     const dispatch = useDispatch()
 
@@ -21,6 +20,9 @@ function Contacts() {
     }
     function handleEdit(index) {
         navigate("/contactEditor/" + index)
+    }
+    function handleDetails(index) {
+        navigate("/details/" + index)
     }
     return (
         <div>
@@ -46,7 +48,9 @@ function Contacts() {
                                         }} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                                             Edit
                                         </button>
-                                        <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 m-2 rounded">
+                                        <button onClick={() => {
+                                            handleDetails(index)
+                                        }} className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 m-2 rounded">
                                             Details
                                         </button>
                                         <button onClick={() => { dispatch(del({ index })); }} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">

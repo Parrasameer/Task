@@ -5,24 +5,16 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { todo, update } from "../src/ToDoReducers";
 
-function ContactEdit() {
+function ContactDetails() {
     const { name } = useParams();
 
     const navigate = useNavigate()
-    const [value, setValue] = useState({});
-    const dispatch = useDispatch();
+
     const data = useSelector((state) => todo(state));
 
-    function updateContact(e) {
+    function goBack(e) {
         e.preventDefault();
-        dispatch(
-            update({
-                index: name,
-                name: value.name || data[name].name,
-                mobile: value.mobile || data[name].mobile,
-                email: value.email || data[name].email,
-            })
-        );
+
         navigate("/");
     }
 
@@ -51,7 +43,7 @@ function ContactEdit() {
                 <div className="flex-1">
                     <div className="max-w-2xl mx-auto">
                         <div className="bg-white shadow-lg rounded-lg px-4 py-6">
-                            <h2 className="text-2xl font-bold mb-6">Updating Contact</h2>
+                            <h2 className="text-2xl font-bold mb-6">Contact Details</h2>
                             <div className="mb-4">
                                 <label
                                     className="block text-gray-700 font-bold mb-2"
@@ -65,11 +57,8 @@ function ContactEdit() {
                                     id="name"
                                     name="name"
                                     placeholder="sameer"
-                                    value={value.name !== undefined ? value.name : data[name].name}
-                                    onChange={(e) => {
-                                        const nameValue = e.target.value.trim() === "" ? "" : e.target.value;
-                                        setValue({ ...value, name: nameValue });
-                                    }}
+                                    value={data[name].name}
+
                                 />
                             </div>
                             <div className="mb-4">
@@ -84,11 +73,8 @@ function ContactEdit() {
                                     type="text"
                                     id="mobile"
                                     name="mobile"
-                                    value={value.mobile !== undefined ? value.mobile : data[name].mobile}
-                                    onChange={(e) => {
-                                        const mobileValue = e.target.value.trim() === "" ? "" : e.target.value;
-                                        setValue({ ...value, mobile: mobileValue });
-                                    }}
+                                    value={data[name].mobile}
+
                                 />
                             </div>
                             <div className="mb-4">
@@ -102,19 +88,16 @@ function ContactEdit() {
                                     type="text"
                                     id="email"
                                     name="email"
-                                    value={value.name !== undefined ? value.email : data[name].email}
-                                    onChange={(e) => {
-                                        const emailValue = e.target.value.trim() === "" ? "" : e.target.value;
-                                        setValue({ ...value, email: emailValue });
-                                    }}
+                                    value={data[name].email}
+
                                 />
                             </div>
                             <div className="flex justify-end">
                                 <button
                                     className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
-                                    onClick={updateContact}
+                                    onClick={goBack}
                                 >
-                                    Update
+                                    Go Back
                                 </button>
                             </div>
                         </div>
@@ -125,5 +108,5 @@ function ContactEdit() {
     );
 }
 
-export default ContactEdit;
+export default ContactDetails;
 
